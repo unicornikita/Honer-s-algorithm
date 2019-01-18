@@ -86,32 +86,29 @@ public class horner1 {
     int SeEnStevec = 0;
     for(int p = 0; p <deljiteljiProstegaClena.length; p++)
     {
-        for(int w = 0; w < deljliteljiVodilnegaClena.legnth; w++)
+        for(int w = 0; w < deljliteljiVodilnegaClena.length; w++)
             {
                 CprotiD[SeEnStevec] = deljiteljiProstegaClena[p]/deljliteljiVodilnegaClena[w];
                 SeEnStevec++;
             }
     }
 
-
     // the sum we will need later to check if number 1 is one of the zeros of the polynom
-    int sestevek = koeficienti[0];
-
+    int sestevek = 0;
     //  zmnozek will save the result of sums you multiply with 1
     int zmnozek = 0;
 
-    // sestevek is saving the sum of coefficients on index k and the sum of the first multiplication, then the sum of coefficients is saved in zmnozek
-   for (int k = 0; k < stopnje.length; k++)
+    //performing the actual horner's algorithm with the possible zeros of the polynom
+    for(int VseNajdeneNicle = 0; VseNajdeneNicle<CprotiD.length; VseNajdeneNicle++)
     {
-        sestevek = koeficienti[k] + zmnozek;
-        zmnozek = sestevek;
-    }
-    // the algorithm lets you know if 1 is a zero of the polynom
-    if (sestevek == 0)
-            System.out.println("Ena je nicla polinoma");
-        
-    else if (sestevek != 0)
-        System.out.println("Ena ni nicla polinoma");
+        for(int VsakaNiclaPosamezno = 0; VsakaNiclaPosamezno<CprotiD.length; VsakaNiclaPosamezno++)
+        {
+            sestevek = CprotiD[VseNajdeneNicle] + zmnozek;
+            zmnozek = sestevek;
+        }
 
+        if(sestevek == 0)
+            System.out.println(CprotiD[VseNajdeneNicle] + " je nicla polinoma");
+    }
     }
 }
