@@ -1,6 +1,6 @@
 import java.util.Scanner;
-public class horner1
-{
+
+public class horner1 {
     public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
     int deljitelj = 0;
@@ -14,7 +14,6 @@ public class horner1
     int koeficienti[] = new int[NajvecjaStopnja+1];
     int vodilniKoeficient = 0;
     int prostiClen = 0;
-    int 
 
     //filling the stopnje[] array with powers between 0 and NajvecjaStopnja
     for(int i = 0; i < NajvecjaStopnja+1; i++)
@@ -31,29 +30,69 @@ public class horner1
                 prostiClen = koeficienti[j];
     }
     // finding the numbers by which the coefficient at the highest power are devideable
-    int deljliteljiVodilnegaClena[] = new int[];
+    int deljliteljiVodilnegaClena[] = new int[vodilniKoeficient*2];
     int stevecDeljitelji = 0;
-    for(int m=vodilniKoeficient*(-1); m <= vodilniKoeficient; m++)
+    
+    //if the coefficient at the highest power is negative
+    if(vodilniKoeficient < 0)
+    {
+        for(int m=vodilniKoeficient; m <= vodilniKoeficient*(-1); m++)
     {
         if(vodilniKoeficient%m == 0)
             deljliteljiVodilnegaClena[stevecDeljitelji] = m;
         
             stevecDeljitelji++;
     }
-    // finding the numbers by which the free coefficient are devidable
-    int deljiteljiProstegaClena[] = new int[];
-    int stevecProstiClen = 0;
-    for(int n=prostiClen*(-1); n<=prostiClen; n++)
+    }
+    //if the coefficient at the highest power is positive
+    else if(vodilniKoeficient>0)
     {
-        if(prostiClen%n == 0)
-            deljiteljiProstegaClena[stevecProstiClen] = n;
+        for(int m=vodilniKoeficient*(-1); m <= vodilniKoeficient; m++)
+             {
+                if(vodilniKoeficient%m == 0)
+                        deljliteljiVodilnegaClena[stevecDeljitelji] = m;
         
-        stevecProstiClen++;
+                 stevecDeljitelji++;
+                }
+    }
+    // finding the numbers by which the free coefficient is devidable
+    int deljiteljiProstegaClena[] = new int[prostiClen*2];
+    int stevecProstiClen = 0;
+    //ffinding the numbers by which the free coefficient is devideable
+    if(prostiClen<0)
+        {
+            for(int n=prostiClen; n<=prostiClen*(-1); n++)
+            {
+             if(prostiClen%n == 0)
+                 deljiteljiProstegaClena[stevecProstiClen] = n;
+        
+                 stevecProstiClen++;
+            }
+        }
+    
+    else if(prostiClen>0)
+    {
+        for(int n=prostiClen*(-1); n<prostiClen; n++)
+            if(prostiClen%n == 0)
+                deljiteljiProstegaClena[stevecProstiClen]=n;
+            
+            stevecProstiClen++;
     }
 
-    int CprotiD[] = new int[];
+    int CprotiD[] = new int[prostiClen*vodilniKoeficient];
+//d so deljitelji vodilnega koeficienta
+//c so deljitelji prostega clena
+// p so stevila deljiva s prostim clenom, w so stevila deljiva z vodilnimi cleni
+    int SeEnStevec = 0;
+    for(int p = 0; p <deljiteljiProstegaClena.length; p++)
+    {
+        for(int w = 0; w < deljliteljiVodilnegaClena.legnth; w++)
+            {
+                CprotiD[SeEnStevec] = deljiteljiProstegaClena[p]/deljliteljiVodilnegaClena[w];
+                SeEnStevec++;
+            }
+    }
 
-    for(int l = 0; l<)
 
     // the sum we will need later to check if number 1 is one of the zeros of the polynom
     int sestevek = koeficienti[0];
