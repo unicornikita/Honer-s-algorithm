@@ -40,7 +40,7 @@ public class horner1 {
         if (vodilniKoeficient < 0) {
             deljenjeZVodKoef = vodilniKoeficient * (-1);
             for (int m = vodilniKoeficient; m <= deljenjeZVodKoef; m++) {
-                if (vodilniKoeficient % m == 0) {
+                if (m!=0 && vodilniKoeficient % m == 0) {
                     deljliteljiVodilnegaClena[stevecDeljitelji] = m;
                     stevecDeljitelji++;
                 }
@@ -50,8 +50,8 @@ public class horner1 {
         // if the coefficient at the highest power is positive
         else if (vodilniKoeficient > 0) {
             deljenjeZVodKoef = vodilniKoeficient;
-            for (int m = vodilniKoeficient * (-1); m <= deljenjeZVodKoef; m++) {
-                if (deljenjeZVodKoef % m == 0)
+            for (int m = vodilniKoeficient; m >= deljenjeZVodKoef*(-1); m--) {
+                if (m != 0 && deljenjeZVodKoef % m == 0)
                     deljliteljiVodilnegaClena[stevecDeljitelji] = m;
 
                 stevecDeljitelji++;
