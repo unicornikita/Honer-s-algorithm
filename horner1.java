@@ -32,17 +32,15 @@ public class horner1 {
         // finding the numbers by which the coefficient at the highest power are
         // devideable
         int deljliteljiVodilnegaClena[] = new int[vodilniKoeficient * 2];
-        int stevecDeljitelji = 0;
         // the next two ints will hold the values of the highest power's coefficient
         int deljenjeZVodKoef = 0;
-        int deljenjeSProstClen = 0;
         // if the coefficient at the highest power is negative
         if (vodilniKoeficient < 0) {
             deljenjeZVodKoef = vodilniKoeficient * (-1);
-            for (int m = vodilniKoeficient; m <= deljenjeZVodKoef; m++) {
-                if (m!=0 && vodilniKoeficient % m == 0) {
-                    deljliteljiVodilnegaClena[stevecDeljitelji] = m;
-                    stevecDeljitelji++;
+            for(int i = deljenjeZVodKoef; i>vodilniKoeficient; i--){
+                for(int j = 0; j < deljliteljiVodilnegaClena.length; j++){
+                    if(vodilniKoeficient%i==0 && i != 0)
+                        deljliteljiVodilnegaClena[j] = vodilniKoeficient/i;
                 }
             }
         }
@@ -51,10 +49,10 @@ public class horner1 {
         else if (vodilniKoeficient > 0) {
             deljenjeZVodKoef = vodilniKoeficient;
             for (int m = vodilniKoeficient; m >= deljenjeZVodKoef*(-1); m--) {
-                if (m != 0 && deljenjeZVodKoef % m == 0)
-                    deljliteljiVodilnegaClena[stevecDeljitelji] = m;
-
-                stevecDeljitelji++;
+                for(int j=0; j < deljliteljiVodilnegaClena.length; j++){
+                    if(deljenjeZVodKoef%m==0 && m!=0)
+                        deljliteljiVodilnegaClena[j] = vodilniKoeficient/m;
+                }
             }
         }
         // finding the numbers by which the free coefficient is devidable
@@ -63,7 +61,7 @@ public class horner1 {
         // ffinding the numbers by which the free coefficient is devideable
         if (prostiClen < 0) {
             for (int n = prostiClen; n <= prostiClen * (-1); n++) {
-                if (prostiClen % n == 0)
+                if (prostiClen % n == 0 && n!=0)
                     deljiteljiProstegaClena[stevecProstiClen] = n;
 
                 stevecProstiClen++;
@@ -72,7 +70,7 @@ public class horner1 {
 
         else if (prostiClen > 0) {
             for (int n = prostiClen * (-1); n < prostiClen; n++)
-                if (prostiClen % n == 0)
+                if (prostiClen % n == 0 && n!=0) 
                     deljiteljiProstegaClena[stevecProstiClen] = n;
 
             stevecProstiClen++;
@@ -107,5 +105,8 @@ public class horner1 {
             if (sestevek == 0)
                 System.out.println(CprotiD[VseNajdeneNicle] + " je nicla polinoma");
         }
+
+        sc.close();
+
     }
 }
