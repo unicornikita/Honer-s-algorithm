@@ -108,6 +108,8 @@ public class horner1 {
                 sestevek = CprotiD[PotencialneNicle]+zmnozek;
                 if(sestevek == 0)
                     break;
+
+                System.out.println("test");
             }
 
             if(sestevek == 0 && CprotiD[PotencialneNicle]!=0){
@@ -119,25 +121,7 @@ public class horner1 {
 
         }
         // performing the actual horner's algorithm with the possible zeros of the
-        // polynom
-        /*for (int VseNajdeneNicle = 0; VseNajdeneNicle < CprotiD.length; VseNajdeneNicle++) {
-            for (int VsakaNiclaPosamezno = 0; VsakaNiclaPosamezno < CprotiD.length; VsakaNiclaPosamezno++) {
-                zmnozek = CprotiD[VseNajdeneNicle]*
-            }
-
-            if (sestevek == 0)
-            {
-                if(CprotiD[VseNajdeneNicle] == 0)
-                    break;  
-                System.out.println(CprotiD[VseNajdeneNicle] + " je nicla polinoma");
-            }
-            
-            else{
-                System.out.println("Ne dela");
-                break;
-            } 
-        }
-        */
+        // polynoM
 
         
 
