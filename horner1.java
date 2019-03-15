@@ -50,7 +50,7 @@ public class horner1 {
             deljenjeZVodKoef = vodilniKoeficient;
             for (int m = vodilniKoeficient; m >= deljenjeZVodKoef*(-1); m--) {
                 for(int j=0; j < deljliteljiVodilnegaClena.length; j++){
-                    if(deljenjeZVodKoef%m==0 && m!=0)
+                    if(m!=0 && deljenjeZVodKoef%m==0)
                         deljliteljiVodilnegaClena[j] = vodilniKoeficient/m;
                 }
             }
@@ -58,7 +58,7 @@ public class horner1 {
         // finding the numbers by which the free coefficient is devidable
         int deljiteljiProstegaClena[] = new int[prostiClen * 2];
         int stevecProstiClen = 0;
-        // ffinding the numbers by which the free coefficient is devideable
+        // finding the numbers by which the free coefficient is devideable
         if (prostiClen < 0) {
             for (int n = prostiClen; n <= prostiClen * (-1); n++) {
                 if (prostiClen % n == 0 && n!=0)
@@ -70,16 +70,16 @@ public class horner1 {
 
         else if (prostiClen > 0) {
             for (int n = prostiClen * (-1); n < prostiClen; n++)
-                if (prostiClen % n == 0 && n!=0) 
+                if (n!=0 && prostiClen % n == 0) 
                     deljiteljiProstegaClena[stevecProstiClen] = n;
 
             stevecProstiClen++;
         }
 
-        int CprotiD[] = new int[prostiClen * vodilniKoeficient];
+        int CprotiD[] = new int[300];
         // d so deljitelji vodilnega koeficienta
-        // c so deljitelji prostega clena
-        // p so stevila deljiva s prostim clenom, w so stevila deljiva z vodilnimi cleni
+        // c so deljitelji prostega clena 
+        // p so stevila deljiva s prostim clenom, w so stevila deljiva z vodilnimi cleni 
         int SeEnStevec = 0;
         for (int p = 0; p < deljiteljiProstegaClena.length; p++) {
             for (int w = 0; w < deljliteljiVodilnegaClena.length; w++) {
@@ -93,17 +93,26 @@ public class horner1 {
         int sestevek = 0;
         // zmnozek will save the result of sums you multiply with 1
         int zmnozek = 0;
-
+        System.out.println("sup");
         // performing the actual horner's algorithm with the possible zeros of the
         // polynom
         for (int VseNajdeneNicle = 0; VseNajdeneNicle < CprotiD.length; VseNajdeneNicle++) {
             for (int VsakaNiclaPosamezno = 0; VsakaNiclaPosamezno < CprotiD.length; VsakaNiclaPosamezno++) {
                 sestevek = CprotiD[VseNajdeneNicle] + zmnozek;
-                zmnozek = sestevek;
+                zmnozek += sestevek;
             }
 
             if (sestevek == 0)
+            {
+                if(CprotiD[VseNajdeneNicle] == 0)
+                    break;  
                 System.out.println(CprotiD[VseNajdeneNicle] + " je nicla polinoma");
+            }
+            
+            else{
+                System.out.println("Ne dela");
+                break;
+            } 
         }
 
         sc.close();
