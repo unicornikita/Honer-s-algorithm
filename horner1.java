@@ -29,6 +29,7 @@ public class horner1 {
             if (j == stopnje.length - 1)
                 prostiClen = koeficienti[j];
         }
+
         // finding the numbers by which the coefficient at the highest power are
         // devideable
         int deljliteljiVodilnegaClena[] = new int[vodilniKoeficient * 2];
@@ -62,18 +63,18 @@ public class horner1 {
         if (prostiClen < 0) {
             for (int n = prostiClen; n <= prostiClen * (-1); n++) {
                 if (prostiClen % n == 0 && n!=0)
-                    deljiteljiProstegaClena[stevecProstiClen] = n;
+                    n = deljiteljiProstegaClena[stevecProstiClen];
 
                 stevecProstiClen++;
             }
         }
 
         else if (prostiClen > 0) {
-            for (int n = prostiClen * (-1); n < prostiClen; n++)
-                if (n!=0 && prostiClen % n == 0) 
-                    deljiteljiProstegaClena[stevecProstiClen] = n;
-
-            stevecProstiClen++;
+            for (int n = prostiClen * (-1); n < prostiClen; n++){
+                if (n!=0 && prostiClen % n == 0) {
+                    n=deljiteljiProstegaClena[stevecProstiClen];
+                    stevecProstiClen++;
+                }
         }
 
         int CprotiD[] = new int[300];
@@ -81,25 +82,45 @@ public class horner1 {
         // c so deljitelji prostega clena 
         // p so stevila deljiva s prostim clenom, w so stevila deljiva z vodilnimi cleni 
         int SeEnStevec = 0;
-        for (int p = 0; p < deljiteljiProstegaClena.length; p++) {
-            for (int w = 0; w < deljliteljiVodilnegaClena.length; w++) {
+        for (int w = 0; w < deljliteljiVodilnegaClena.length; w++) {
+            for (int p = 0; p < deljiteljiProstegaClena.length; p++) {
+                if(deljiteljiProstegaClena[p]/deljliteljiVodilnegaClena[w] == 0)
+                    break;
                 CprotiD[SeEnStevec] = deljiteljiProstegaClena[p] / deljliteljiVodilnegaClena[w];
+                System.out.println(CprotiD[SeEnStevec]);
                 SeEnStevec++;
+
             }
         }
 
         // the sum we will need later to check if number 1 is one of the zeros of the
         // polynom
-        int sestevek = 0;
-        // zmnozek will save the result of sums you multiply with 1
+        int sestevek = vodilniKoeficient;
+        // zmnozek will save the result of sums you multiply with the sum
         int zmnozek = 0;
         System.out.println("sup");
+
+        for(int PotencialneNicle=0; PotencialneNicle < CprotiD.length; PotencialneNicle++){
+            for(int preverjanje = 0; preverjanje < CprotiD.length; preverjanje++){
+                zmnozek = CprotiD[PotencialneNicle]*sestevek;
+                sestevek = CprotiD[PotencialneNicle]+zmnozek;
+            }
+
+            if(sestevek == 0){
+                if(CprotiD[PotencialneNicle] == 0)
+                    break;
+                
+                    System.out.println(CprotiD[PotencialneNicle] + " je nicla polinoma");
+            }
+
+            else System.out.println("Broken");
+
+        }
         // performing the actual horner's algorithm with the possible zeros of the
         // polynom
-        for (int VseNajdeneNicle = 0; VseNajdeneNicle < CprotiD.length; VseNajdeneNicle++) {
+        /*for (int VseNajdeneNicle = 0; VseNajdeneNicle < CprotiD.length; VseNajdeneNicle++) {
             for (int VsakaNiclaPosamezno = 0; VsakaNiclaPosamezno < CprotiD.length; VsakaNiclaPosamezno++) {
-                sestevek = CprotiD[VseNajdeneNicle] + zmnozek;
-                zmnozek += sestevek;
+                zmnozek = CprotiD[VseNajdeneNicle]*
             }
 
             if (sestevek == 0)
@@ -114,8 +135,14 @@ public class horner1 {
                 break;
             } 
         }
+        */
+
+        
 
         sc.close();
 
     }
+
+}
+
 }
