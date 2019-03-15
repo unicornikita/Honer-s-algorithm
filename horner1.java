@@ -61,18 +61,20 @@ public class horner1 {
         int stevecProstiClen = 0;
         // finding the numbers by which the free coefficient is devideable
         if (prostiClen < 0) {
+            int finding = 0;
             for (int n = prostiClen; n <= prostiClen * (-1); n++) {
                 if (prostiClen % n == 0 && n!=0)
-                    n = deljiteljiProstegaClena[stevecProstiClen];
+                    finding = deljiteljiProstegaClena[stevecProstiClen];
 
                 stevecProstiClen++;
             }
         }
 
         else if (prostiClen > 0) {
+            int finding = 0;
             for (int n = prostiClen * (-1); n < prostiClen; n++){
                 if (n!=0 && prostiClen % n == 0) {
-                    n=deljiteljiProstegaClena[stevecProstiClen];
+                    finding=deljiteljiProstegaClena[stevecProstiClen];
                     stevecProstiClen++;
                 }
         }
@@ -104,11 +106,11 @@ public class horner1 {
             for(int preverjanje = 0; preverjanje < CprotiD.length; preverjanje++){
                 zmnozek = CprotiD[PotencialneNicle]*sestevek;
                 sestevek = CprotiD[PotencialneNicle]+zmnozek;
+                if(sestevek == 0)
+                    break;
             }
 
-            if(sestevek == 0){
-                if(CprotiD[PotencialneNicle] == 0)
-                    break;
+            if(sestevek == 0 && CprotiD[PotencialneNicle]!=0){
                 
                     System.out.println(CprotiD[PotencialneNicle] + " je nicla polinoma");
             }
