@@ -30,6 +30,30 @@ public class horner1 {
                 prostiClen = koeficienti[j];
         }
 
+            for(double pc = 300; pc > -300; pc--){
+                if(result(koeficienti, pc) == 0){
+                    System.out.println(pc + "je nicla polinoma");
+                }
+            }
+        
+        
+
+        sc.close();
+    }
+
+    //method to check possible zeros
+        public static double result(int koef[], double possiblezero){
+            double result = 0;
+            for(int i = 0; i < koef.length; i++)
+                result = result*possiblezero + koef[i];
+            return result;
+        }
+
+}
+
+
+
+/* 
         // finding the numbers by which the coefficient at the highest power are
         // devideable
         int deljliteljiVodilnegaClena[] = new int[vodilniKoeficient * 2];
@@ -101,11 +125,12 @@ public class horner1 {
         // zmnozek will save the result of sums you multiply with the sum
         int zmnozek = 0;
         System.out.println("sup");
-
+        int stevec = 0;
         for(int PotencialneNicle=0; PotencialneNicle < CprotiD.length; PotencialneNicle++){
             for(int preverjanje = 0; preverjanje < CprotiD.length; preverjanje++){
                 zmnozek = CprotiD[PotencialneNicle]*sestevek;
-                sestevek = CprotiD[PotencialneNicle]+zmnozek;
+                sestevek = koeficienti[stevec]+zmnozek;
+                stevec++;
                 if(sestevek == 0)
                     break;
 
@@ -122,13 +147,4 @@ public class horner1 {
         }
         // performing the actual horner's algorithm with the possible zeros of the
         // polynoM
-
-        
-
-        sc.close();
-
-    }
-
-}
-
-}
+*/
